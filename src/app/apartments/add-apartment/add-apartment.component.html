@@ -1,1 +1,123 @@
-<p>add-apartment works!</p>
+<div class="container">
+  <form [formGroup]="addApartmentForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="apartNum" class="form-label">Apartment Number</label>
+      <input
+        type="text"
+        id="apartNum"
+        class="form-control"
+        formControlName="apartNum"
+        required
+      />
+      <div *ngIf="addApartmentForm.get('apartNum')?.invalid && addApartmentForm.get('apartNum')?.touched">
+        <small class="text-danger" *ngIf="addApartmentForm.get('apartNum')?.errors?.['required']">
+          Apartment number is required.
+        </small>
+        <small class="text-danger" *ngIf="addApartmentForm.get('apartNum')?.errors?.['pattern']">
+          Invalid format. Only <b>letters</b>, <b>numbers</b>, or allowed symbols are accepted.
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="floorNum" class="form-label">Floor Number</label>
+      <input
+        type="text"
+        id="floorNum"
+        class="form-control"
+        formControlName="floorNum"
+        required
+      />
+      <div *ngIf="addApartmentForm.get('floorNum')?.invalid && addApartmentForm.get('floorNum')?.touched">
+        <small class="text-danger" *ngIf="addApartmentForm.get('floorNum')?.errors?.['required']">
+          Apartment floorNum is required.
+        </small>
+        <small class="text-danger" *ngIf="addApartmentForm.get('floorNum')?.errors?.['pattern']">
+          Invalid format. Only <b>letters</b>, <b>numbers</b>, or allowed symbols are accepted.
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="surface" class="form-label">Surface Area (m²)</label>
+      <input
+        type="number"
+        id="surface"
+        class="form-control"
+        formControlName="surface"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="terrace" class="form-label">Terrace?</label>
+      <div class="form-check form-check-inline">
+        <input
+          type="radio"
+          id="terraceYes"
+          class="form-check-input"
+          formControlName="terrace"
+          value="true"
+        />
+        <label class="form-check-label" for="terraceYes">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          type="radio"
+          id="terraceNo"
+          class="form-check-input"
+          formControlName="terrace"
+          value="false"
+        />
+        <label class="form-check-label" for="terraceNo">No</label>
+      </div>
+    </div>
+
+    <div class="mb-3" *ngIf="terrace?.value">
+      <label for="surfaceterrace" class="form-label">Terrace Surface</label>
+      <input
+        type="number"
+        id="surfaceterrace"
+        class="form-control"
+        formControlName="surfaceterrace"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label>Category:</label>
+      <div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="category" value="S+1" id="categoryS1">
+          <label class="form-check-label" for="categoryS1">S+1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="category" value="S+2" id="categoryS2">
+          <label class="form-check-label" for="categoryS2">S+2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="category" value="S+3" id="categoryS3">
+          <label class="form-check-label" for="categoryS3">S+3</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="ResidenceId" class="form-label">Residence ID</label>
+      <input
+        type="number"
+        id="ResidenceId"
+        class="form-control"
+        formControlName="ResidenceId"
+        required
+      />
+    </div>
+
+    <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="addApartmentForm.invalid"
+  >
+    Add
+  </button>  </form>
+</div>

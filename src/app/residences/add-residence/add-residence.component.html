@@ -1,1 +1,89 @@
-<p>add-residence works!</p>
+<div class="container">
+  <h3>Add New Residence</h3>
+  <form [formGroup]="addResidenceForm" (ngSubmit)="onSubmit()">
+    <!-- Champ Caché (id) -->
+    <input type="hidden" formControlName="id" />
+
+    <!-- Nom de la résidence -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        formControlName="name"
+        required
+      />
+      <div
+        *ngIf="
+          addResidenceForm.get('name')?.invalid &&
+          addResidenceForm.get('name')?.touched
+        "
+        class="text-danger"
+      >
+        Name is required (minimum 3 characters).
+      </div>
+    </div>
+
+    <!-- Adresse -->
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <input
+        type="text"
+        id="address"
+        class="form-control"
+        formControlName="address"
+        required
+      />
+      <div
+        *ngIf="
+          addResidenceForm.get('address')?.invalid &&
+          addResidenceForm.get('address')?.touched
+        "
+        class="text-danger"
+      >
+        Address is required.
+      </div>
+    </div>
+
+    <!-- URL de l'image -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Image URL</label>
+      <input
+        type="url"
+        id="image"
+        class="form-control"
+        formControlName="image"
+        required
+      />
+      <div
+        *ngIf="
+          addResidenceForm.get('image')?.invalid &&
+          addResidenceForm.get('image')?.touched
+        "
+        class="text-danger"
+      >
+        A valid image URL is required.
+      </div>
+    </div>
+
+    <!-- Statut -->
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select id="status" class="form-select" formControlName="status">
+        <option value="Disponible">Disponible</option>
+        <option value="En Construction">En Construction</option>
+        <option value="Vendu">Vendu</option>
+      </select>
+    </div>
+
+    <!-- Bouton Ajouter -->
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="addResidenceForm.invalid"
+    >
+      Add Residence
+    </button>
+  </form>
+</div>
